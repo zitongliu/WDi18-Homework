@@ -43,7 +43,7 @@ You need to do this every time you're submitting homework.
 
 - **Commit your work to your local repository progressively**
     + `git add .`
-    + `git commit -m "YOUR_COMMIT_MESSAGE_GOES_HERE"`(where `YOUR_COMMIT_MESSAGE_GOES_HERE` is your description of the work you are committing)
+    + `git commit -m "your commit message goes here"`(where `your commit message goes here` is your description of the work you are committing, eg "added subtraction to JS calculator").
 - **Merge changes from this repository into your own local repository**
     + `git pull upstream master`
 - **Push the changes in your local repository to your forked repository**
