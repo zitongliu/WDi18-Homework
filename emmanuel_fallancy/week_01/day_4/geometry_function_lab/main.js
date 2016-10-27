@@ -109,7 +109,7 @@ var area = function() {
     var height = Math.sqrt( Math.pow( baseToComputeHeight, 2 )
                  + Math.pow( hypoSide, 2 ) );
     var area = 0.5 * base * height;
-
+    
     areaResult = "The area of triangle is " + String( area.toFixed( 2 ) );
   }
   else {
