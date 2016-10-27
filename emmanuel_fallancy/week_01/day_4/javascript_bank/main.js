@@ -43,14 +43,14 @@ var bank = {
 
                          // if the owner exist, then deposit into his account
                          if ( this.accounts[ i ].owner === owner ) {
-                           console.log( "Amount deposited to account "
-                                        + owner
-                                        + " is"
-                                        , amount );
-                           this.accounts[ i ].totalBalance += amount;
+                              console.log( "Amount deposited to account "
+                                           + owner
+                                           + " is"
+                                           , amount );
+                              this.accounts[ i ].totalBalance += amount;
 
-                           // Show the current balance
-                           return this.showBalance( owner );
+                              // Show the current balance
+                              return this.showBalance( owner );
                          }
                       }
 
