@@ -73,7 +73,7 @@ var verbing = function (word) {
   if (word.length < 3) return word;
   if (word === "sing" || word === "ring" || word === "bling" || word === "ding") {
     return word + "ingly"
-  } else if (word.search("ing") === "ing") {
+  } else if (word.slice(-3) === "ing") {
     return word + "ly";
   } else {
     return word + "ing";
@@ -97,7 +97,7 @@ var notBad = function(phrase) {
 // The even/odd reporter
 //
 // Write a for loop that will iterate from 0 to 20. For each iteration, it will check if the current number is even or odd, and report that to the screen (e.g. "2 is even").
-console.log("Please enter 'oddReport(the starting number,the last number);' ");
+// console.log("Please enter 'oddReport(the starting number,the last number);' ");
 var oddReport = function(startNum,endNum) {
   for (i = startNum ; i <=endNum ; i += 1) {
     if (i%2 === 0) {
@@ -156,7 +156,7 @@ var gradeAssign = function (grade) {
 
 // AGE CALCULATOR
 
-console.log("Please enter 'ageCalculator(the current year,your birth year);' ");
+// console.log("Please enter 'ageCalculator(the current year,your birth year);' ");
 var ageCalculator = function(currentYear, birthYear) {
   var age;
   age = currentYear - birthYear; // input the current data into age
@@ -165,14 +165,14 @@ var ageCalculator = function(currentYear, birthYear) {
 
 // FORTUNE TELLER
 
-console.log("Please enter 'fortuneTeller(\"your job\", \"your partner's name\", \"where you wish to live\", and how many kids you want);' ");
+//console.log("Please enter 'fortuneTeller(\"your job\", \"your partner's name\", \"where you wish to live\", and how many kids you want);' ");
 var fortuneTeller = function (kids,partner,loc,job) {
   console.log("You will be a " + job + " in " + loc + ", and married to " + partner + " with " + kids + " kids.");
 }
 
 // GEOMETIZER
 
-console.log("Please enter 'geometizer(the radius of the area you wish to check);' ");
+// console.log("Please enter 'geometizer(the radius of the area you wish to check);' ");
 // var geometizer = function (radius) {
 //   var area = Math.PI*(radius*radius);
 //   console.log("The area of the circle is " + area);
@@ -180,7 +180,7 @@ console.log("Please enter 'geometizer(the radius of the area you wish to check);
 
 
 // Lifetime Supply
-console.log("Please enter 'supplyCalculator(your current age, your maximum age, how many do you eat per day);' ");
+// console.log("Please enter 'supplyCalculator(your current age, your maximum age, how many do you eat per day);' ");
  var supplyCalculator= function(currentAge,maxAge,perDay) {
    var daysLeft = (maxAge - currentAge)*365.2425;
    var totalNeed = Math.ceil(daysLeft*perDay); // calculate totalNeed from data
@@ -189,7 +189,7 @@ console.log("Please enter 'supplyCalculator(your current age, your maximum age, 
 
 
 // TEMPERATURE CONVERTER
-console.log("please enter 'tempConvert(temp in celcius, temp in fahrenheit);'");
+// console.log("please enter 'tempConvert(temp in celcius, temp in fahrenheit);'");
 var tempConvert = function (tempC, tempF) {
     var celcToF = (tempC * 9 / 5 + 32); // convert Celcius to Fahrenheit
     var fahrToC = ((tempF - 32) / 5 * 9); // convert Fahrenheit to Celsius
