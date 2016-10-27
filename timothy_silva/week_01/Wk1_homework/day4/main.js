@@ -87,7 +87,7 @@ var isObtuse = function(triangleIn){
    var x = triangleIn.sideA;
    var y = triangleIn.sideB;
    var z = triangleIn.sideC;
-   if (x !== y && y !== z && x !== z){
+   if (x == y && y !== z && x !== z){
     return "Triangle is obtuse";
   }else{
     return "Triangle is not obtuse";
