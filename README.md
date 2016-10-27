@@ -1,13 +1,24 @@
 # WDi-18 ([General Assembly, Sydney](https://generalassemb.ly/sydney))
 ##Homework Repository
 
-1. Repository Setup;
-2. Do Your Homework;
-3. Submit Your Homework.
+1. Git Config
+2. Repository Setup;
+3. Do Your Homework;
+4. Submit Your Homework.
 
 ___
 
-### 1. Repository Setup
+### 1. Git Config 
+
+You only need to do this part once on your machine. 
+
+```sh
+git config --global user.name "ReplaceMe"
+git config --global user.email "replace@me.com"
+git config --global color.ui "auto"
+```
+
+### 2. Repository Setup
 
 You only need to do this part once, not every time you're submitting homework!
 
@@ -26,7 +37,7 @@ You only need to do this part once, not every time you're submitting homework!
     + `git remote add upstream https://github.com/cjbarnaby/WDi18-Homework`
     + `git pull upstream master`
 
-### 2. Do your Homework
+### 3. Do your Homework
 
 You should put each night's homework in a new folder within the appropriate directory of your homework repo. So, for day two, where you have two tasks ("Calculator" and "Strings"), you might do something like this:
 
@@ -37,7 +48,7 @@ You should put each night's homework in a new folder within the appropriate dire
 5. Create the files necessary to complete the homework in their respective directories;
 6. Get to it!
 
-### 3. Submit Your Homework
+### 4. Submit Your Homework
 
 You need to do this every time you're submitting homework.
 
