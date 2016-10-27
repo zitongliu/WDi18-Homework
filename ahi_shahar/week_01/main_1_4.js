@@ -91,14 +91,73 @@ var cashRegister = function (shopingCart) {
     var price = shopingCart[key];
     sum += Number.parseFloat(price);
   };
-  // var items = Object.keys(shopingCart); // create an array of the items
-  // for (var i = 0; i < items.length; i++) {
-  //   var oneAtATime = items[i]; // get the name of the key for the item
-  //   var price = shopingCart.oneAtATime; // get the price for the item
-  //   sum += Number.parseFloat(price); // convert the price to a float and add it to the sum
-  // };
   return sum;
   console.log(sum);
 };
 // Output
 cashRegister(cartForParty); // 60.55
+
+var cards = [];
+var badData = function(num,result,reason,ccDate) {
+  cards.push( {
+  valid : result,
+  number : num,
+  result : reason,
+  date : ccDate
+} );
+}
+var data = function (num,result,ccDate) {
+  cards.push( {
+  valid : result,
+  number : num,
+  date : ccDate
+  });
+}
+
+var currentDate = {
+  month : "10",
+  year : "2016",
+  date : function() {
+    return this.year + this.month;
+  }
+}; // Close objec
+
+// var card = prompt("please enter a valid card number ####-####-####-####");
+// var expDate = prompt("please enter your expiration date YYYY-MM");
+var validateCreditCard = function (card, expDate) {
+  var cardString = '';
+  for ( i = 0 ; i < card.length ; i += 1){
+    if (card.charAt(i) !== '-') {
+      cardString = cardString + card.charAt(i);
+    };
+  }; //close loop
+  var ccDate = '';
+  for ( i = 0 ; i < expDate.length ; i += 1){
+    if (expDate.charAt(i) !== '-') {
+      ccDate = ccDate + expDate.charAt(i);
+    };
+  }; //close loop
+  if ( isNaN(cardString) === true ) return badData(card,false,"must_only_have_numbers!",ccDate);
+  // confirms the number contains integers only
+  if ( cardString.length != 16) return badData(card,false,"must_have_16_digits!",ccDate);
+  // check the number consists of 16 digits
+  if ( isNaN(ccDate) === true ) return badData(card,false,"expiry_date_must_only_have_numbers!",ccDate);
+  // confirms the number contains integers only
+  if ( ccDate.length != 6) return badData(card,false,"must_enter YYYY-MM in numbers!",ccDate);
+  // check the number consists of 6 digits
+  if ( currentDate.date() > ccDate) return badData(card,false,"Card has EXPIRED!",ccDate);
+  var first = cardString.charAt(0);
+  var isSame = 0;
+  for ( i = 0 ; i < cardString.length ; i += 1) {
+    if ( first.charCodeAt() != cardString.charCodeAt(i)) isSame += 1;  // Check for un-identical numbers
+  };
+  if (isSame === 0) return badData(card,false,"must_have_at_least_two_different_digits",ccDate); // if no un-identical numbers found, INVALID CARD
+  if (Number.parseInt(cardString)%2 != 0) return badData(card,false,"last_digit_is_not_even!",ccDate);  // Check that the last digit is even..
+  var total = 0;
+  for ( i = 0 ; i < cardString.length ; i += 1){
+    var value = Number.parseInt(cardString.charAt(i));
+    total += value;
+  };
+  if ( total < 16 ) return badData(card,false,"total_of_digits_under_16!",ccDate);
+return data(card,true,ccDate)
+};
