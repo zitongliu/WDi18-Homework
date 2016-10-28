@@ -22,11 +22,11 @@ var bank = {
                 totalBalance: 200
               }
             ],
-  addAccount: function( account ) {
+  addAccount: function ( account ) {
                 this.accounts.push( account );
                 console.log( account.owner + " created new account" );
               },
-  showBalance: function( owner ) {
+  showBalance: function ( owner ) {
                  for ( var i = 0; i < this.accounts.length; i++ ) {
 
                    // If the owner exist, return the balance
@@ -38,7 +38,7 @@ var bank = {
                  // Otherwise, return null to indicate the user does not exist
                  return null;
                },
-  depositToAccount: function( amount, owner ) {
+  depositToAccount: function ( amount, owner ) {
                       for ( var i = 0; i < this.accounts.length; i++ ) {
 
                          // if the owner exist, then deposit into his account
@@ -56,7 +56,7 @@ var bank = {
 
                       return null;
                     },
-  withdrawFromAccount: function( amount, owner ) {
+  withdrawFromAccount: function ( amount, owner ) {
                          for ( var i = 0; i < this.accounts.length; i++ ) {
 
                            // If the owner exist, then deduct from his balance
