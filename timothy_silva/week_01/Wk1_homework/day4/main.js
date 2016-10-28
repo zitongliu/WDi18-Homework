@@ -147,3 +147,17 @@ var cashRegister = function(shoppingCart){
 // 4444-4444-4444-4444 only one type of number
 // 1111-1111-1111-1110 sum less than 16
 // 6666-6666-6666-6661 odd final number
+
+var creditCard = "1111-2222-3333-4444";
+
+var cardChecker = function(cardNum){
+  var cardInts;
+  for (var i = 0; i < cardNum.length; i++) {
+    if
+
+  }
+
+
+};
+
+cardChecker(creditCard);
