@@ -75,11 +75,13 @@ var pickLane2 = function (end.Ln) {
   else if ( sLine.line === endLn) var tripEnd = sLine.stops;
   else console.log( "You're a dick.");
 };
+
 var planTrip = function (startPt, startLn, endLn, endPt) {
-  startLn = startLn.toUpperCase().charAt(0);
-  endLn = endLn.toUpperCase().charAt(0);
+  // startLn = startLn.toUpperCase().charAt(0);
+  // endLn = endLn.toUpperCase().charAt(0);
+  debugger;
   if (startLn.valueOf() === endLn.valueOf()) { // check if the user is a cunt
-    if (startPt.valueOf() === endPt.valueOf()) { // meaning, is he an idiot and is already at his destination
+    if (startPt.valueOf() == endPt.valueOf()) { // meaning, is he an idiot and is already at his destination
       return prompt("You're already at your destination you fool.")
     };
   };
