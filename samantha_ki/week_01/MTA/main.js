@@ -26,25 +26,13 @@ var line6Forward = [
 ];
 
 // Creating Lines - backword direction by reversing array order
-var lineNBackward = [];
-
-for (i = 0; i < lineNForward.length; i++) {
-  lineNBackward.push(lineNForward[i]);
-};
+var lineNBackward = lineNForward.slice();
 lineNBackward.reverse();
 
-var lineLBackward = [];
-
-for (i = 0; i < lineLForward.length; i++) {
-  lineLBackward.push(lineLForward[i]);
-};
+var lineLBackward = lineLForward.slice();
 lineLBackward.reverse();
 
-var line6Backward = [];
-
-for (i = 0; i < line6Forward.length; i++) {
-  line6Backward.push(line6Forward[i]);
-};
+var line6Backward = line6Forward.slice();
 line6Backward.reverse();
 
 // Test Case: If we want to travel from Times Square to Union Square
@@ -73,7 +61,7 @@ var startLineRequest = function(start) {
   return startingLine;
 };
     // TEST CASE - note as we have processed toString we need to keep this test case
-var startLine = startLineRequest("N");
+var startLine = startLineRequest("L");
 
 // Function to return user's input for Starting Station
 var startStationRequest = function(start) {
@@ -82,7 +70,7 @@ var startStationRequest = function(start) {
   return startingStation;
 };
     // TEST CASE
-var startStation = startStationRequest("Union Square");
+var startStation = startStationRequest("8th");
 
 // Function to return user's input for Ending Line aka destination - making sure that endLine is returned as a string
 var endLineRequest = function(end) {
@@ -91,7 +79,7 @@ var endLineRequest = function(end) {
   return endingLine;
 };
 
-var endLine = endLineRequest("N");
+var endLine = endLineRequest("6");
 
 // Function to return user's input for Ending Station aka destination
 var endStationRequest = function(end) {
@@ -100,7 +88,7 @@ var endStationRequest = function(end) {
   return endingStation;
 };
 
-var endStation = endStationRequest("34th");
+var endStation = endStationRequest("Astor Place");
 
 
 // Now that we have the user's input - what do we do with it?
@@ -122,30 +110,35 @@ var endStation = endStationRequest("34th");
 
 // Let's start with the basics - how do we
 
-// TRANSFERRING
+              // TRANSFERRING
 
   if (startLine === endLine) {
     var transfer = false;
   } else {
     var transfer = true;
+    var currentLine = startLine;
 };
 
 
 // Using Transfer information, we create new variable nextStation to determine next step
 if (transfer === true) {
   var nextStation = "union square";
-  debugger;
   } else {
   var nextStation = endStation;
+};
+
+var transferComplete = function() {
+  console.log("Transfer at Union Square from " + currentLine + " to " + endLine + ".");
+  currentLine = endLine;
 };
 
 // Getting from one point to another... PT 1
   // CHECKING DIRECTIONAL FLOW...
   // Using indexOf to test and compare the direction of travel
 
-if (startLine = "N") {
+if (currentLine === "N") {
   var testLine = lineNForward;
-} else if (startLine = "L") {
+} else if (currentLine === "L") {
   var testLine = lineLForward;
 } else {
   var testLine = line6Forward;
@@ -157,38 +150,131 @@ var nextStationIndex = testLine.indexOf(nextStation);
 console.log("when testing, index of start station: " + startStationIndex);
 console.log("when testing, index of next station: "+ nextStationIndex);
 
-// Checking which direction of which line
+              // CHECKING LINE DIRECTION
 
 if (startStationIndex < nextStationIndex) {
   var lineDirection = testLine;
 } else {
-  if (startLine = "N") {
+  if (currentLine === "N") {
     var lineDirection = lineNBackward;
-  } else if (startLine = "L") {
+  } else if (currentLine === "L") {
     var lineDirection = lineLBackward;
   } else {
     var lineDirection = line6Backward;
   };
 };
 
-startStationIndex = lineDirection.indexOf(startStation);
-nextStationIndex = lineDirection.indexOf(nextStation);
+var nextLine = lineDirection;
 
+startStationIndex = nextLine.indexOf(startStation);
+nextStationIndex = nextLine.indexOf(nextStation);
+
+
+                // CALCULATING & PRINTING STOPS
 // Now you know which way you are going, you can calculate and print out how many stops to the next destination - use a for loop
 
   // How many stops?
 var numberOfStops = nextStationIndex - startStationIndex;
 console.log("Number of Stops: " + numberOfStops);
+var numberOfStopsLeg1 = numberOfStops;
 
 var stopsLog = [];
 
 // logging the stops
-for (i = startStationIndex; i < nextStationIndex; i++) {
-  stopsLog.push(lineDirection[i]);
+for (i = startStationIndex; i <= nextStationIndex; i++) {
+  stopsLog.push(nextLine[i]);
 };
 
   // NOTE: at some point, you need to come back and for loop tripStops[i] for trips with multiple lines/legs
 
 var tripStops = stopsLog.join(", ");
 
-console.log(startLine + " stops are: " + tripStops);
+console.log(currentLine + " stops are: " + tripStops);
+
+transferComplete();
+
+
+              // TESTING IF WE NEED TO RUN AGAIN
+
+if (currentLine === endLine && nextStation === endStation) {
+  // woohoo, we made it! let's start logging shit
+  console.log("Final Output goes here, Sam hasn't done this yet");
+} else if (currentLine === endLine) {
+    transfer = false;
+    startStation = nextStation;
+    nextStation = endStation;
+  // SECOND LEG OF TRIP
+
+      // Getting from one point to another... PT 1
+        // CHECKING DIRECTIONAL FLOW...
+        // Using indexOf to test and compare the direction of travel
+
+      if (currentLine === "N") {
+        var testLine = lineNForward;
+      } else if (currentLine === "L") {
+        var testLine = lineLForward;
+      } else {
+        var testLine = line6Forward;
+      };
+
+      var startStationIndex = testLine.indexOf(startStation);
+      var nextStationIndex = testLine.indexOf(nextStation);
+      console.log("when testing, index of start station: " + startStationIndex);
+      console.log("when testing, index of next station: "+ nextStationIndex);
+
+                    // CHECKING LINE DIRECTION
+
+      if (startStationIndex < nextStationIndex) {
+        var lineDirection = testLine;
+      } else {
+        if (currentLine === "N") {
+          var lineDirection = lineNBackward;
+        } else if (currentLine === "L") {
+          var lineDirection = lineLBackward;
+        } else {
+          var lineDirection = line6Backward;
+        };
+      };
+
+      var nextLine = lineDirection;
+
+      startStationIndex = nextLine.indexOf(startStation);
+      nextStationIndex = nextLine.indexOf(nextStation);
+
+
+                      // CALCULATING & PRINTING STOPS
+      // Now you know which way you are going, you can calculate and print out how many stops to the next destination - use a for loop
+
+        // How many stops?
+      var numberOfStops = nextStationIndex - startStationIndex;
+      console.log("Number of Stops: " + numberOfStops);
+      var numberOfStopsLeg2 = numberOfStops;
+
+      var stopsLog = [];
+
+      // logging the stops
+      for (i = startStationIndex; i <= nextStationIndex; i++) {
+        stopsLog.push(nextLine[i]);
+      };
+        // NOTE: at some point, you need to come back and for loop tripStops[i] for trips with multiple lines/legs
+
+      var tripStops = stopsLog.join(", ");
+
+      console.log(currentLine + " stops are: " + tripStops);
+
+      var totalStops = numberOfStopsLeg1 + numberOfStopsLeg2;
+      console.log("Total Stops: " + totalStops);
+
+} else {
+  // they need to transfer again - go back to transfer step
+  console.log("Sam hasn't done this yet, and doesn't need to, but wanted to keep it here just in case she has time to investigate");
+};
+
+// if (currentLine === endLine && nextStation === endStation) {
+  // we made it
+  //} else if (currentLine === endLine) {
+    // startStation = nextStation;
+    // go back to DIRECTIONAL FLOW to progress
+  //} else {
+    // startStation = nextStation;
+    // }
