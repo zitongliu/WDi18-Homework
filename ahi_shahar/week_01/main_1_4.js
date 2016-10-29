@@ -104,7 +104,7 @@ var badData = function(num,result,reason,ccDate) {
   number : num,
   result : reason,
   date : ccDate
-} );
+  });
 }
 var data = function (num,result,ccDate) {
   cards.push( {
@@ -127,7 +127,7 @@ var currentDate = {
 var validateCreditCard = function (card, expDate) {
   var cardString = '';
   for ( i = 0 ; i < card.length ; i += 1){
-    if (card.charAt(i) !== '-') {
+    if (card.charAt(i) !== '=') {
       cardString = cardString + card.charAt(i);
     };
   }; //close loop
@@ -146,10 +146,10 @@ var validateCreditCard = function (card, expDate) {
   if ( ccDate.length != 6) return badData(card,false,"must_enter YYYY-MM in numbers!",ccDate);
   // check the number consists of 6 digits
   if ( currentDate.date() > ccDate) return badData(card,false,"Card has EXPIRED!",ccDate);
-  var first = cardString.charAt(0);
+  // var first = cardString.charAt(0);
   var isSame = 0;
-  for ( i = 0 ; i < cardString.length ; i += 1) {
-    if ( first.charCodeAt() != cardString.charCodeAt(i)) isSame += 1;  // Check for un-identical numbers
+  for ( i = 1 ; i < cardString.length ; i += 1) {
+    if ( cardString.charCodeAt(0) != cardString.charCodeAt(i)) isSame += 1;  // Check for un-identical numbers
   };
   if (isSame === 0) return badData(card,false,"must_have_at_least_two_different_digits",ccDate); // if no un-identical numbers found, INVALID CARD
   if (Number.parseInt(cardString)%2 != 0) return badData(card,false,"last_digit_is_not_even!",ccDate);  // Check that the last digit is even..
@@ -158,7 +158,7 @@ var validateCreditCard = function (card, expDate) {
     var value = Number.parseInt(cardString.charAt(i));
     total += value;
   };
-  if ( total < 16 ) return badData(card,false,"total_of_digits_under_16!",ccDate);
+  if ( total < 16 ) return badData(card,false,"total_of_digits_under_16!",expDate);
 return data(card,true,ccDate)
 };
 
@@ -169,7 +169,7 @@ return data(card,true,ccDate)
 // The bank has many accounts. Accounts should be objects that all share a set of common functionality.
 var bank = [];
 var newAcc = {
-  
+
 }
 // Accounts
 // Accounts have a current balance and owner's name. You should be able to deposit or withdraw from an account to change the balance.
