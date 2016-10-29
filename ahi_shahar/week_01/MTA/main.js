@@ -73,7 +73,7 @@ var planTrip = function (startPt, endPt) {
   var bonVoyage = "You are traveling from " + startPt + " on line " + startLn + " continue through " + trip.join(", ") + " to " + changePoint + ",\n" +
    "Change lines at " + changePoint + ".\n" +
     "Take line " + endLn + " and continue through " + tripEnd.join(", ") + " all the way to " + endPt + ".\n" + totalStops + " stops in total.";
-  console.log(bonVoyage);
+  alert(bonVoyage);
 };
 
 planTrip(
