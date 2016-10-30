@@ -28,7 +28,7 @@ var planTrip = function ( originLine, originStation, destinationLine, destinatio
     stationNames = moveToDestination( start, end, originStations );
     numberOfStops = getNumberOfStopsInSingleLine( start, end );
 
-    msg = singleLineMsgPrefix( originLine, stationNames );
+    msg = singleLineMsgPrefixs( originLine, stationNames, numberOfStops );
 
     return msg;
   }
@@ -188,4 +188,10 @@ var getNumberOfStopsInMultipleLine = function ( startA, endA, startB, endB ) {
   return numberOfStops;
 };
 
+// Different Line
 console.log( planTrip( "N", "34th", "L", "8th" ) );
+console.log( planTrip( "L", "1st", "N", "Times Square" ) );
+
+// Same Line
+console.log( planTrip( "N", "8th", "N", "Times Square" ) );
+console.log( planTrip( "6", "Grand Central", "6", "Union Square" ) );
