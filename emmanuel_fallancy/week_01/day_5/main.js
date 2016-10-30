@@ -4,14 +4,39 @@ var lineN = [ "Times Square", "34th", "28th", "23rd", "Union Square", "8th" ];
 var lineL = [ "8th", "6th", "Union Square", "3rd", "1st" ];
 var line6 = [ "Grand Central","33rd", "28th", "23rd", "Union Square", "Astor Place" ];
 
+/*
+  Main method to run the planning for the trip.
+  Will return the direction as string.
+  @param {String} originLine [Starting origin line]
+  @param {String} originStation [Starting station in the origin line]
+  @param {String} destinationLine [Ending destination line]
+  @param {String} destinationStation [Ending station in destination line]
+  @return {String}
+ */
 var planTrip = function ( originLine, originStation, destinationLine, destinationStation ) {
-  // Get origin station and line
-  // Get destination station and line
+
+  // Lets just say that someone wanna mess around
+  if( arguments.length !== 4 ) {
+    return "Please enter valid input...";
+  }
+
   var isSameLine = originLine === destinationLine;
   var msg = "";
   var totalStops = 0;
   var originStations = getStationsInLine( originLine ); // This will be in array
   var destinationStations = getStationsInLine( destinationLine ); // This will be in array
+
+  // Get validation result for the line and station
+  var validateOrigin = validateLineAndStation( originLine, originStation );
+  var validateDestination = validateLineAndStation( destinationLine, destinationStation );
+
+  // This is used to validate the stations and line
+  if ( validateOrigin.length > 0 ) {
+    return validateOrigin;
+  }
+  else if ( validateDestination.length > 0 ) {
+    return validateDestination;
+  }
 
   // Variable for intersection station stop to identify to go forward or backward
   var intersectionStop = "Union Square";
@@ -28,7 +53,7 @@ var planTrip = function ( originLine, originStation, destinationLine, destinatio
     stationNames = moveToDestination( start, end, originStations );
     numberOfStops = getNumberOfStopsInSingleLine( start, end );
 
-    msg = singleLineMsgPrefixs( originLine, stationNames, numberOfStops );
+    msg = singleLineMsgPrefix( originLine, stationNames, numberOfStops );
 
     return msg;
   }
@@ -38,12 +63,15 @@ var planTrip = function ( originLine, originStation, destinationLine, destinatio
     var stationsDestination = "";
     var numberOfStops = 0;
 
+    // Get the origin station number
     var startA = getStationNumber( originLine, originStation );
     var endA = getStationNumber( originLine, intersectionStop );
 
+    // Get the destination station number
     var startB = getStationNumber( destinationLine, intersectionStop );
     var endB = getStationNumber( destinationLine, destinationStation );
 
+    // Get the stations and total number of stops
     var stations = moveToDestinations( startA, endA, originStations, startB, endB, destinationStations );
     stationsOrigin = stations.origin;
     stationsDestination = stations.destination;
@@ -53,6 +81,13 @@ var planTrip = function ( originLine, originStation, destinationLine, destinatio
   }
 };
 
+/*
+  Used to the index of the station or relatively, the position of the station.
+  Will return the station index number. If not found, will return -1.
+  @param {String} stationLine [The name of the line]
+  @param {String} stationStop [The name of the station]
+  @return {Number}
+ */
 var getStationNumber = function ( stationLine, stationStop ) {
   var stationNumber = -1;
 
@@ -75,24 +110,42 @@ var getStationNumber = function ( stationLine, stationStop ) {
   return stationNumber;
 };
 
-var singleLineMsgPrefix = function ( line, stationNames ) {
+/*
+  Prefix for single line message.
+  Overloading function as it is also being used in other function.
+  @param {String} line [Name of the line]
+  @param {String} stationNames [Name of the stations passed]
+  @param {Number} totalStops [Total number of stops]
+  @return {String}
+ */
+var singleLineMsgPrefix = function ( line, stationNames, totalStops ) {
   var msgPrefix = "You must travel through the following stop on "
                   + line
                   + " line: "
                   + stationNames
                   + ".";
 
+  if ( arguments.length === 2 ) {
+    return msgPrefix;
+  }
+  else if ( arguments.length === 3 ){
+    msgPrefix = msgPrefix
+              + "\n"
+              + totalNumberOfStopsMsgPrefix( totalStops );
+  }
+
   return msgPrefix;
 };
 
-var singleLineMsgPrefixs = function ( line, stationNames, totalStops ) {
-  var msgPrefix = singleLineMsgPrefix( line, stationNames )
-                  + "\n"
-                  + totalNumberOfStopsMsgPrefix( totalStops );
-
-  return msgPrefix;
-};
-
+/*
+  Prefix for the multiple line message
+  @param {String} lineA [Name of the first line]
+  @param {String} stationNamesA [Name of the stations in first line]
+  @param {String} lineB [Name of the second line]
+  @param {String} stationNamesB [Name of the stations in second line]
+  @param {Number} totalStops [Total number of stops throughout the journey]
+  @return {String}
+ */
 var multipleLineMsgPrefix = function ( lineA, stationNamesA, lineB, stationNamesB, totalStops ) {
   var msgPrefix = singleLineMsgPrefix( lineA, stationNamesA )
                   + "\n"
@@ -105,10 +158,21 @@ var multipleLineMsgPrefix = function ( lineA, stationNamesA, lineB, stationNames
   return msgPrefix;
 };
 
+/*
+  Prefix for the number of stops.
+  @param {Number} stops [Total number of stops]
+  @return {String}
+ */
 var totalNumberOfStopsMsgPrefix = function ( stops ) {
   return String( stops ) + " stops in total.";
 };
 
+/*
+  Return the stations in array form.
+  If no line found based on the passing argument, then return empty array.
+  @param {String} line [Name of the line passed in the argument]
+  @return {Array}
+ */
 var getStationsInLine = function ( line ) {
 
   // Return the stations in array
@@ -121,8 +185,18 @@ var getStationsInLine = function ( line ) {
   else if ( line === "6" ) {
     return line6;
   }
+
+  return [];
 };
 
+/*
+  To simulate on moving forward in the line.
+  Will return the stations passed from the starting point to ending point.
+  @param {Number} start [Starting point]
+  @param {Number} end   [Ending point]
+  @param {Array} line   [The line]
+  @return {String} [returns the stations passed]
+ */
 var moveForward = function ( start, end, line ) {
   var stations = [];
 
@@ -133,6 +207,14 @@ var moveForward = function ( start, end, line ) {
   return stations.join( ", " );
 };
 
+/*
+  To simulate on moving backward in the line.
+  Will return the stations passed from starting point to ending point.
+  @param {Number} start [Starting point]
+  @param {Number} end   [Ending point]
+  @param {Array} line   [The line]
+  @return {String} [returns the stations passed]
+ */
 var moveBackward = function ( start, end, line ) {
   var stations = [];
 
@@ -143,6 +225,13 @@ var moveBackward = function ( start, end, line ) {
   return stations.join( ", " );
 };
 
+/*
+  To simulate on moving to destination in single line
+  @param {Number} start [Starting point]
+  @param {Number} end   [Ending point]
+  @param {Array} line   [Line]
+  @return {String} [Output out the stations passed in the line]
+ */
 var moveToDestination = function ( start, end, line ) {
   var stationNames = "";
 
@@ -156,6 +245,17 @@ var moveToDestination = function ( start, end, line ) {
   return stationNames;
 };
 
+/*
+  Used to simulate on going to the destination.
+  Will return the stations passed in object form.
+  @param {Number} startA [Starting point in first line]
+  @param {Number} endA [Ending point in first line]
+  @param {Array} lineA [Line in array form - first line]
+  @param {Number} startB [Starting point in second line]
+  @param {Number} endB [Ending point in second line]
+  @param {Array} lineB [Line in array form - second line]
+  @return Object
+ */
 var moveToDestinations = function ( startA, endA, lineA, startB, endB, lineB ) {
   var stationNamesA = "";
   var stationNamesB = "";
@@ -172,13 +272,26 @@ var moveToDestinations = function ( startA, endA, lineA, startB, endB, lineB ) {
   return stationNames;
 };
 
-
+/*
+  To keep track the number of stops in single line
+  @param {Number} start [Start point]
+  @param {Number} end [End point]
+  @return {Number}
+ */
 var getNumberOfStopsInSingleLine = function ( start, end ) {
   var numberOfStops = Math.abs( end - start );
 
   return numberOfStops;
 };
 
+/*
+ To keep track on number of stops which involved multiple line
+ @param  {Integer} startA [Index of origin station]
+ @param  {Integer} endA   [Index of ending station]
+ @param  {Integer} startB [Index of continuing starting station]
+ @param  {Integer} endB   [Index of destination station]
+ @return {Integer}
+*/
 var getNumberOfStopsInMultipleLine = function ( startA, endA, startB, endB ) {
   var numberOfStopsA = getNumberOfStopsInSingleLine( startA, endA );
   var numberOfStopsB = getNumberOfStopsInSingleLine( startB, endB );
@@ -188,10 +301,52 @@ var getNumberOfStopsInMultipleLine = function ( startA, endA, startB, endB ) {
   return numberOfStops;
 };
 
+/*
+ * Used to validate line and station. Will return message in String.
+ * If no error, will return empty string
+ * @param  {String} line    [The line]
+ * @param  {String} station [The station]
+ * @return {String}
+ */
+var validateLineAndStation = function ( line, station ) {
+  var stations = getStationsInLine( line );
+
+  if ( line.length === 0 || station.length === 0 ) {
+    return "Please enter the station and line.";
+  }
+  if ( stations.length === 0 ) {
+    return "Line " + line + " does not exist.";
+  }
+  if ( getStationNumber( line, station ) < 0 ) {
+    return "Station " + station + " does not exist in Line " + line + ".";
+  }
+
+  return "";
+};
+
+/*
+ * To be used for web page
+ * @return {void} [Do some action only]
+ */
+var getDirection = function () {
+  var orgLine = document.getElementById( "origin-line" ).value;
+  var orgStation = document.getElementById( "origin-station" ).value;
+  var destLine = document.getElementById( "destination-line" ).value;
+  var destStation = document.getElementById( "destination-station" ).value;
+
+  console.log( orgLine );
+  var direction = planTrip( orgLine, orgStation, destLine, destStation );
+
+  document.getElementById( "showdirection" ).innerHTML = direction;
+};
+
 // Different Line
-console.log( planTrip( "N", "34th", "L", "8th" ) );
+console.log( planTrip( "N", "34th", "L", "1st" ) );
 console.log( planTrip( "L", "1st", "N", "Times Square" ) );
 
 // Same Line
 console.log( planTrip( "N", "8th", "N", "Times Square" ) );
 console.log( planTrip( "6", "Grand Central", "6", "Union Square" ) );
+
+// Negative scenario
+console.log( planTrip( "" ) );
