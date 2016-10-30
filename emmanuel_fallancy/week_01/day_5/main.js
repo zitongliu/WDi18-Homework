@@ -147,13 +147,18 @@ var singleLineMsgPrefix = function ( line, stationNames, totalStops ) {
   @return {String}
  */
 var multipleLineMsgPrefix = function ( lineA, stationNamesA, lineB, stationNamesB, totalStops ) {
-  var msgPrefix = singleLineMsgPrefix( lineA, stationNamesA )
-                  + "\n"
+  var msgPrefix = singleLineMsgPrefix( lineA, stationNamesA );
+
+  if ( stationNamesB.length > 0 ) {
+    msgPrefix += "\n"
                   + "Change at Union Square.\n"
                   + "Your journey continues through the following stops: "
                   + stationNamesB
-                  + ".\n"
-                  + totalNumberOfStopsMsgPrefix( totalStops );
+                  + ".";
+  }
+
+  msgPrefix += "\n"
+               + totalNumberOfStopsMsgPrefix( totalStops );
 
   return msgPrefix;
 };
@@ -349,3 +354,6 @@ console.log( planTrip( "6", "Grand Central", "6", "Union Square" ) );
 
 // Negative scenario
 console.log( planTrip( "" ) );
+
+// Intersection stop
+console.log( planTrip( "6", "Grand Central", "L", "Union Square" ) );
