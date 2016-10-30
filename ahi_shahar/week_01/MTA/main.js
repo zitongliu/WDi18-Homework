@@ -54,7 +54,6 @@ var planTrip = function (startPt, endPt) {
     var bonVoyage = "You are traveling from " + startPt + " on line " + startLn + ".\n" +
     "Travel through " + trip.join(", ") + " all the way to " + endPt + ".\n" + (trip.length + 1) + " stops in total.";
     alert(bonVoyage);
-    return;
   };
   // check connections
   var changePoint = checkChange(trip,tripEnd);
@@ -75,7 +74,10 @@ var planTrip = function (startPt, endPt) {
     "Take line " + endLn + " and continue through " + tripEnd.join(", ") + " all the way to " + endPt + ".\n" + totalStops + " stops in total.";
   alert(bonVoyage);
 };
-
+console.log("N, stops : Times Square, 34th, 28th, 23rd North, Union Square, 8th North");
+console.log("L, stops : 8th, 6th, Union Square, 3rd, 1st");
+console.log("6, stops : Grand Central, 33rd, 28th St, 23rd, Union Square, Astor Place");
+// planTrip("Union Square", "8th")
 planTrip(
   startPt = prompt("Where are you starting your trip?"),
   endPt = prompt("and where are you going to?")
