@@ -1,31 +1,30 @@
 // Creating Lines - forward direction
 var lineNForward = [
-  "times square",
+  "Times Square",
   "34th",
   "28th",
   "23rd",
-  "union square",
+  "Union Square",
   "8th"
 ];
 
 var lineLForward = [
   "8th",
   "6th",
-  "union square",
+  "Union Square",
   "3rd",
   "1st"
 ];
 
 var line6Forward = [
-  "grand central terminal",
+  "Grand Central Terminal",
   "33rd",
   "28th",
   "23rd",
-  "union square",
-  "astor place"
+  "Union Square",
+  "Astor Place"
 ];
 
-// Creating Lines - backword direction by reversing array order
 var lineNBackward = lineNForward.slice();
 lineNBackward.reverse();
 
@@ -52,52 +51,46 @@ line6Backward.reverse();
       // NOTE: This will need to be addressed via a If/Else statement - if I get to the stage of building an input interface
     // How are we using it?
 
-//var input = startLine + startStop && endLine + endStop;
 
 // Function to return user's input for Starting Line aka origin - making sure that startLine is returned as a string
 var startLineRequest = function(start) {
   var startingLine = start.toString();
-  console.log("starting line: " + startingLine);
+  console.log("Starting Line: " + startingLine);
   return startingLine;
 };
-    // TEST CASE - note as we have processed toString we need to keep this test case
-var startLine = startLineRequest("L");
 
 // Function to return user's input for Starting Station
 var startStationRequest = function(start) {
-  var startingStation = start.toLowerCase();
-  console.log("starting station: " + startingStation);
+  var startingStation = start//.toLowerCase();
+  console.log("Starting Station: " + startingStation);
   return startingStation;
 };
-    // TEST CASE
-var startStation = startStationRequest("8th");
 
 // Function to return user's input for Ending Line aka destination - making sure that endLine is returned as a string
 var endLineRequest = function(end) {
   var endingLine = end.toString();
-  console.log("ending line: "+ endingLine);
+  console.log("Ending Line: "+ endingLine);
   return endingLine;
 };
 
-var endLine = endLineRequest("6");
-
 // Function to return user's input for Ending Station aka destination
 var endStationRequest = function(end) {
-  var endingStation = end.toLowerCase();
-  console.log("ending station: " + endingStation);
+  var endingStation = end//.toLowerCase();
+  console.log("Ending Station: " + endingStation);
   return endingStation;
 };
 
-var endStation = endStationRequest("Astor Place");
-
+          // TEST CASE
+var startLine = startLineRequest("N");
+var startStation = startStationRequest("Times Square");
+var endLine = endLineRequest("6");
+var endStation = endStationRequest("33rd");
 
 // Now that we have the user's input - what do we do with it?
   // First, check whether the startLine === endLine
     // If yes, then move on to second step
     // If no, then send them to Transfer Point ie. Union Square
   // Secondly, we need to figure out the direction they are moving on the line
-    // If forward, then reference the forward line array
-    // If backward, then reference the backward line array
   // Thirdly, calculate the indexOf startStation & endStation to
     // Store number of stops between the two
     // Print each stop between the two
@@ -107,29 +100,30 @@ var endStation = endStationRequest("Astor Place");
 
 // DETERMINING LINE TRAVEL DIRECTION
   // First, check the startLine and startStation
-
-// Let's start with the basics - how do we
-
               // TRANSFERRING
 
   if (startLine === endLine) {
     var transfer = false;
+    var currentLine = startLine;
   } else {
     var transfer = true;
     var currentLine = startLine;
 };
 
-
 // Using Transfer information, we create new variable nextStation to determine next step
 if (transfer === true) {
-  var nextStation = "union square";
+  var nextStation = "Union Square";
   } else {
   var nextStation = endStation;
 };
 
 var transferComplete = function() {
+  if (currentLine === endLine) {
+    console.log("You have reached your destination");
+  } else{
   console.log("Transfer at Union Square from " + currentLine + " to " + endLine + ".");
   currentLine = endLine;
+  }
 };
 
 // Getting from one point to another... PT 1
@@ -146,9 +140,6 @@ if (currentLine === "N") {
 
 var startStationIndex = testLine.indexOf(startStation);
 var nextStationIndex = testLine.indexOf(nextStation);
-
-console.log("when testing, index of start station: " + startStationIndex);
-console.log("when testing, index of next station: "+ nextStationIndex);
 
               // CHECKING LINE DIRECTION
 
@@ -175,7 +166,6 @@ nextStationIndex = nextLine.indexOf(nextStation);
 
   // How many stops?
 var numberOfStops = nextStationIndex - startStationIndex;
-console.log("Number of Stops: " + numberOfStops);
 var numberOfStopsLeg1 = numberOfStops;
 
 var stopsLog = [];
@@ -189,7 +179,7 @@ for (i = startStationIndex; i <= nextStationIndex; i++) {
 
 var tripStops = stopsLog.join(", ");
 
-console.log(currentLine + " stops are: " + tripStops);
+console.log("You must travel through the following stops on the " + currentLine + " : " + tripStops);
 
 transferComplete();
 
@@ -197,8 +187,9 @@ transferComplete();
               // TESTING IF WE NEED TO RUN AGAIN
 
 if (currentLine === endLine && nextStation === endStation) {
-  // woohoo, we made it! let's start logging shit
-  console.log("Final Output goes here, Sam hasn't done this yet");
+  var totalStops = numberOfStopsLeg1;
+  console.log("Total Stops: " + totalStops);
+
 } else if (currentLine === endLine) {
     transfer = false;
     startStation = nextStation;
@@ -219,8 +210,6 @@ if (currentLine === endLine && nextStation === endStation) {
 
       var startStationIndex = testLine.indexOf(startStation);
       var nextStationIndex = testLine.indexOf(nextStation);
-      console.log("when testing, index of start station: " + startStationIndex);
-      console.log("when testing, index of next station: "+ nextStationIndex);
 
                     // CHECKING LINE DIRECTION
 
@@ -247,7 +236,6 @@ if (currentLine === endLine && nextStation === endStation) {
 
         // How many stops?
       var numberOfStops = nextStationIndex - startStationIndex;
-      console.log("Number of Stops: " + numberOfStops);
       var numberOfStopsLeg2 = numberOfStops;
 
       var stopsLog = [];
@@ -260,7 +248,7 @@ if (currentLine === endLine && nextStation === endStation) {
 
       var tripStops = stopsLog.join(", ");
 
-      console.log(currentLine + " stops are: " + tripStops);
+      console.log("Your journey continues through the following stops on the " + currentLine + " : " + tripStops);
 
       var totalStops = numberOfStopsLeg1 + numberOfStopsLeg2;
       console.log("Total Stops: " + totalStops);
@@ -269,12 +257,3 @@ if (currentLine === endLine && nextStation === endStation) {
   // they need to transfer again - go back to transfer step
   console.log("Sam hasn't done this yet, and doesn't need to, but wanted to keep it here just in case she has time to investigate");
 };
-
-// if (currentLine === endLine && nextStation === endStation) {
-  // we made it
-  //} else if (currentLine === endLine) {
-    // startStation = nextStation;
-    // go back to DIRECTIONAL FLOW to progress
-  //} else {
-    // startStation = nextStation;
-    // }
