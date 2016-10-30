@@ -28,5 +28,9 @@ var triangle = {
   sideB: 4,
   SideC: 4
 };
-var isEquilateral = triangle.sideA === triangle.sideB === triangle.SideC;
-console.log(isEquilateral);
+var isEquilateral = triangle.sideA === triangle.sideB && triangle.sideB === triangle.SideC;
+console.log("Is Equilateral");
+var isIsosceles = triangle.sideA;
+  if isIsosceles = triangle.sideB && !=== triangle.SideC;
+  console.log("Is Isosceles");
+  
