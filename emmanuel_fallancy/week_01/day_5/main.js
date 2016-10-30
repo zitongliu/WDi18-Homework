@@ -152,7 +152,7 @@ var multipleLineMsgPrefix = function ( lineA, stationNamesA, lineB, stationNames
                   + "Change at Union Square.\n"
                   + "Your journey continues through the following stops: "
                   + stationNamesB
-                  + "\n"
+                  + ".\n"
                   + totalNumberOfStopsMsgPrefix( totalStops );
 
   return msgPrefix;
