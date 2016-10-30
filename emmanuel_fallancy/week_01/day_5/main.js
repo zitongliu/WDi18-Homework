@@ -334,7 +334,6 @@ var getDirection = function () {
   var destLine = document.getElementById( "destination-line" ).value;
   var destStation = document.getElementById( "destination-station" ).value;
 
-  console.log( orgLine );
   var direction = planTrip( orgLine, orgStation, destLine, destStation );
 
   document.getElementById( "showdirection" ).innerHTML = direction;
