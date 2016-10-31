@@ -161,16 +161,80 @@ var validateCreditCard = function (card, expDate) {
   if ( total < 16 ) return badData(card,false,"total_of_digits_under_16!",expDate);
 return data(card,true,ccDate)
 };
-
+console.clear();
 // JavaScript Bank
 // In this homework, you'll create a basic bank in Javascript. The bank has many accounts and the following capabilities that you need to write.
 // Bank
 // There is only one bank. This bank has an array of accounts. The bank needs a method that will return the total sum of money in the accounts. It also needs an addAccount method that will enroll a new account at the bank and add it to the array of accounts. There is no need to create additional functions of the bank to delete accounts, etc.
 // The bank has many accounts. Accounts should be objects that all share a set of common functionality.
 var bank = [];
-var newAcc = {
+var addAccount = function (name, balance){
+  var account = {}
+  account.name = name;
+  account.balance = balance;
+  account.withdraw = function (amountToDraw) {
+    if (this.balance-amountToDraw < 0) {
+      amountToDraw = prompt("Insufficient funds! would you like to try another amount?");
+      if (!amountToDraw) {
+        return;
+      };
+    };
+    this.balance -= amountToDraw;
+    alert("You have succesfully withrew $" + amountToDraw + ", you have $" + this.balance + " left in your account.");
+    return;
+  };
+  account.deposit = function (amountToDeposit) {
+    this.balance = parseInt(this.balance) + parseInt(amountToDeposit);
+    alert("You have succesfully deposited $" + amountToDeposit + " into your account,\n" + "Your new balance is $" + this.balance + ".")
+    return;
+  };
+  bank.push(account);
+  alert("Congratulations " + name + " your new account number is: " + ((bank.length)-1) + "\n and your remaining balance is: $" + balance + ".")
+};
+var totalInBank = function (bank) {
+  var totalMonies = 0;
+  for ( i = 0 ; i < bank.length ; i += 1) {
+    totalMonies += bank[i].balance
+  };
+  return totalMonies;
+};
+var userResponse = function (user) {
+  if (user.toLowerCase() === "withdraw" ) {
+    var accNum = prompt("What is your account number?");
+    if (!accNum || accNum >= bank.length) return alert("Must enter a valid account number!");
+    var cash = prompt("How much would you like to withdraw?");
+    bank[accNum].withdraw(cash);
+  } else if (user.toLowerCase() === "deposit" ) {
+    var accNum = prompt("What is your account number?");
+    if (!accNum || accNum >= bank.length || accNum <   0) {
+      return prompt("Must enter a valid account number!");
+    };
+    var cash = prompt("How much would you like to deposit?");
+    bank[accNum].deposit(cash);
+  } else if (user.toLowerCase() === "create account" ) {
+    var name = prompt("Under what name would you like to open the account?");
+    var cash = prompt("What would be your initial deposit?");
+    if (cash < 0 ) return prompt("Can not create account in debt")
+    addAccount(name,cash);
+  } else if (user.toLowerCase() === "transfer" ) {
+    var accOne = prompt("From which account would you like to transfer?");
+    var accTwo = prompt("To which account?");
+    var cash = prompt("How much to transfer?");
+    bank[accOne].withdraw(cash);
+    bank[accTwo].deposit(cash);
+  } else prompt("That is not a valid option, please select from the menu!")
+};
 
-}
+addAccount("ahi", 300);
+addAccount("Groucho", 300);
+addAccount("Harpo", 300);
+addAccount("Zeppo", 300);
+var user = prompt("What would you like to do?\n Withdraw.\n Deposit.\n Create Account.\n Transfer.")
+while (user) {
+  userResponse(user);
+  user = prompt("What else would you like to do?\n Withdraw.\n Deposit.\n Create Account.\n Transfer.");
+};
+
 // Accounts
 // Accounts have a current balance and owner's name. You should be able to deposit or withdraw from an account to change the balance.
 // There is no need to write a user interface. Make sure functions return values -- you may also have your functions console.log() values to help you see your code working

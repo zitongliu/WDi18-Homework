@@ -54,6 +54,7 @@ var planTrip = function (startPt, endPt) {
     var bonVoyage = "You are traveling from " + startPt + " on line " + startLn + ".\n" +
     "Travel through " + trip.join(", ") + " all the way to " + endPt + ".\n" + (trip.length + 1) + " stops in total.";
     alert(bonVoyage);
+    return;
   };
   // check connections
   var changePoint = checkChange(trip,tripEnd);
