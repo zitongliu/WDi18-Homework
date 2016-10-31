@@ -30,13 +30,20 @@ var planTrip = function ( originLine, originStation, destinationLine, destinatio
   var validateOrigin = validateLineAndStation( originLine, originStation );
   var validateDestination = validateLineAndStation( destinationLine, destinationStation );
 
-  // This is used to validate the stations and line
+  // Check for same station
+  var isTheSameStation = isSameStation( originLine, originStation, destinationLine, destinationStation );
+
+  // This is used to validate the stations and line, and same destination with origin
   if ( validateOrigin.length > 0 ) {
     return validateOrigin;
   }
   else if ( validateDestination.length > 0 ) {
     return validateDestination;
   }
+  else if ( isTheSameStation.length > 0 ) {
+    return isTheSameStation;
+  }
+
 
   // Variable for intersection station stop to identify to go forward or backward
   var intersectionStop = "Union Square";
@@ -330,6 +337,39 @@ var validateLineAndStation = function ( line, station ) {
 };
 
 /*
+  Used to check if it is the same station. If not the same, then return empty string.
+  @param {String} lineA [Origin line]
+  @param {String} stationA [Origin station]
+  @param {String} lineB [Destination line]
+  @param {String} stationB [Destination station]
+  @return {String}
+ */
+var isSameStation = function ( originLine, originStation, destinationLine, destinationStation ) {
+
+ if ( originLine === destinationLine
+      && originStation === destinationStation ) {
+    return "You are already in station "
+           + destinationStation
+           + " in line "
+           + destinationLine
+           + ".";
+  }
+  // This is for checking origin and destination is the intersection station
+  // -> though it is in the different line
+  if ( originLine !== destinationLine
+       && originStation === "Union Square"
+       && destinationStation === "Union Square" ) {
+    return "You are already in "
+           + destinationStation
+           + " in line "
+           + destinationLine
+           + ".";
+  }
+
+  return "";
+};
+
+/*
  * To be used for web page
  * @return {void} [Do some action only]
  */
@@ -354,6 +394,9 @@ console.log( planTrip( "6", "Grand Central", "6", "Union Square" ) );
 
 // Negative scenario
 console.log( planTrip( "" ) );
+console.log( planTrip( "L", "1st", "NA", "Times Square" ) );
+console.log( planTrip( "N", "8th", "N", "8th"));
+console.log( planTrip( "L", "Union Square", "N", "Union Square"));
 
 // Intersection stop
 console.log( planTrip( "6", "Grand Central", "L", "Union Square" ) );
