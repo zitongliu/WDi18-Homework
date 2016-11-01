@@ -22,10 +22,6 @@ header {
   color: white;
 }
 
-nav {
-
-}
-
 ul {
   margin: 0 55px;
 }
@@ -97,4 +93,57 @@ li {
 
 a {
   text-decoration: none;
+}
+
+footer {
+  background-color: black;
+  color: white;
+}
+
+.footers {
+  overflow: auto;
+  width: 80%;
+  margin: 0 60px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.nav-footer {
+  float: left;
+  width: 33%
+}
+
+.nav ul {
+  padding: 10px 0;
+
+}
+
+.nav-footer ul li {
+  display: block;
+  padding: 10px 0;
+  margin: 0;
+  border-bottom: 2px solid gray;
+}
+
+.miscellaneous {
+  margin: 15px 130px 0 60px;
+  padding: 0 80px;
+  overflow: auto;
+}
+
+.copyright {
+  float: left;
+}
+
+.themes {
+  float: right;
+}
+
+.nav-footer-first-ul-li {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+#no-border-bottom {
+  border-bottom: 0;
 }
