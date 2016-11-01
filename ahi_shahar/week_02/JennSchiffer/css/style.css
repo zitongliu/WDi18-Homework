@@ -144,6 +144,7 @@ body h1 {
   overflow: hidden;
   z-index: 900;
   font-size: 0;
+  transition: all 1s ease-in-out;
 }
 div.absolute.a1 {
   position: fixed;
@@ -183,7 +184,7 @@ div.absolute.a6 {
 }
 #info:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
@@ -195,7 +196,7 @@ div.absolute.a6 {
 }
 #info1:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
@@ -208,7 +209,7 @@ div.absolute.a6 {
 
 #info2:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
@@ -221,7 +222,7 @@ div.absolute.a6 {
 
 #info3:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
@@ -233,7 +234,7 @@ div.absolute.a6 {
 }
 #info4:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
@@ -245,7 +246,7 @@ div.absolute.a6 {
 }
 #info5:hover {
   position: absolute;
-  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);;
+  background: radial-gradient(white 45%, black 55%, ghostwhite 15%);
   border-radius: 5%;
   top: 0;
   left: 0;
