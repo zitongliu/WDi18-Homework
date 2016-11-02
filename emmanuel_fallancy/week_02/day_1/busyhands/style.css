@@ -1,7 +1,9 @@
 body {
-  background-image: url( "images/bg_body.png" );
+  background-image: url( "images/bg_body.jpg" );
   background-color: white;
   margin: 0;
+  font-family: Arial, sans-serif;
+  background-size: auto;
 }
 
 #wrapper {
@@ -10,6 +12,8 @@ body {
   overflow: auto;
   height: 60px;
   padding: 3px;
+  background-image: url( "images/bg_body.jpg" );
+  background-size: contain;
 }
 
 #container {
@@ -52,12 +56,19 @@ li {
   margin: 0;
 }
 
+#shadow {
+  position: relative;
+  bottom: 5px;
+}
+
 .blurb {
   margin: 0 50px;
   padding: 15px;
   overflow: auto;
   box-sizing: border-box;
-  border: 2px solid gray;
+  box-shadow: -2px -1px 3px gray;
+  background-image: url( "images/bg_blurb.jpg" );
+  background-size: cover;
 }
 
 .blurb-article {
@@ -97,7 +108,7 @@ a {
 
 footer {
   background-color: black;
-  color: white;
+  color: gray;
 }
 
 .footers {
@@ -129,6 +140,7 @@ footer {
   margin: 15px 130px 0 60px;
   padding: 0 80px;
   overflow: auto;
+  font-size: 14px;
 }
 
 .copyright {
@@ -142,6 +154,7 @@ footer {
 .nav-footer-first-ul-li {
   font-size: 20px;
   font-weight: 800;
+  color: white;
 }
 
 #no-border-bottom {
