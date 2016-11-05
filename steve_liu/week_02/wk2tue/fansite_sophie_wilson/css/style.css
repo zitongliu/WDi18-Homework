@@ -1,5 +1,4 @@
 body {
-  min-height: 700px;
   background-image: url(https://65.media.tumblr.com/41c22a815b0d152b1fcd3d2d6a3cb2c6/tumblr_ng2y4yaxLr1rcf4rko1_500.jpg);
   background-size: cover;
   background-position: 50%;
@@ -16,41 +15,18 @@ body {
   height:20px;
   background-color: black;
 }
-/*
-.top {
-  height:100px;
-  position:relative;
-  background-color: white;
-  width:100%;
-  overflow:auto;
-  top:10px;;
-  z-index:100;
-  border-bottom:1px solid black;
-  margin0left:0;
-  border:none;
-}
-nav {
-  position: absolute;
-  width: 40%;
-  right:0px;
-  text-align:right;
-
-}
-.logo {
-  float:left;
-  width:48%;
-}
-*/
 
 article {
-  width:50%;
-  position: absolute;
+  width:55%;
+  position: relative;
   top:140px;
-  left:40%;
+  right:40px;
   background-color: white;
   padding:20px 20px 20px 20px;
   text-align:center;
   min-height: 440px;
+  margin-bottom:100px;
+  float:right;
 }
 
 .profile {
@@ -62,14 +38,14 @@ article {
 
 h1 {
   font-size:40px;
+  font-family: 'Ubuntu', sans-serif;
 }
 .gridContainer {
-  overflow:auto;
   width:30%;
-  position: absolute;
-  left:50px;
+  position: fixed;
   top: 140px;
-
+  left:50px;
+  float:left;
 
 }
 .grid {
@@ -103,14 +79,11 @@ a.grid:hover {
 a.currentPage:hover {
   background-color: #0EBFE9;
 }
-
-footer {
+.copyright {
+  width:353px;
+  top:100%;
   position:absolute;
-  width:100%;
-  background-color: black;
+  text-align:center;
   color:white;
-  bottom: -90px;
-  padding:0px 0px 0px 50px;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+  background-color: black;
 }
