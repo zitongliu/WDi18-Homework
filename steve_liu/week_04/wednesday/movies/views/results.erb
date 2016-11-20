@@ -1,0 +1,14 @@
+<p>You've searched for "<%= @movie_title %>""</p>
+<h3>Results</h3>
+<% @movies.each do |movie| %>
+  <hr>
+  <h4><%= movie["Title"]%></h4>
+  <p>Title:
+    <a href="/results/<%=movie['Title']%>">
+      <%= movie['Title']%>"
+    </a>
+  </p>
+  <p>Year: <%= movie["Year"]%></p>
+  <p>Genre: <%= movie["Genre"]%></p>
+  <p>Plot: <%= movie["Plot"]%></p>
+<% end %>
