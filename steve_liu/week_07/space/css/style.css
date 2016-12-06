@@ -1,0 +1,21 @@
+.people, .location {
+  border: 1px solid black;
+  width: 48vw;
+  height: 15vh;
+  float: left;
+  overflow: scroll;
+}
+body {
+  font-family: monospace;
+  box-sizing: border-box;
+}
+.peopleCount {
+  font-size: 15px;
+  color: dodgerblue;
+}
+
+
+#map {
+  height: 450px;
+  width: 100vw;
+}
