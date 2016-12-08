@@ -1,6 +1,16 @@
+var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 3,
+  center: {lat: 0, lng: 0}
+});
 
+var marker = new google.maps.Marker({
+    position: {lat: 0, lng: 0},
+    map: map,
+    title:"Hello World!"
+});
 
 $(document).ready(function(){
+
 
 window.setInterval(function(){
 
@@ -9,17 +19,23 @@ window.setInterval(function(){
   issLongitude = parseFloat(issLongitude);
   issLatitude = parseFloat(issLatitude);
 
-  console.log(issLongitude + " GFSFDSFSDF");
-  var iss = {lat: issLatitude, lng: issLongitude};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 2,
-    center: {lat: issLatitude, lng: issLongitude}
-  });
 
+  var iss = {lat: issLatitude, lng: issLongitude};
   var marker = new google.maps.Marker({
     position: iss,
-    map: map
+    // map: map
   });
+
+  // To add the marker to the map, call setMap();
+  marker.setMap(map);
+
+  // To remove the marker from the map
+  // marker.setMap(null);
+
+  // var marker = new google.maps.Marker({
+  //   position: iss,
+  //   map: map
+  // });
 
 }, 5000);
 
